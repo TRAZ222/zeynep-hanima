@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soru Oyunu</title>
+
+<style>
+body{
+    background:#ffe6f0;
+    font-family:Arial,sans-serif;
+    text-align:center;
+    margin-top:100px;
+}
+
+h1{
+    color:#ff1493;
+}
+
+button{
+    padding:15px 25px;
+    font-size:20px;
+    border:none;
+    cursor:pointer;
+    margin:20px;
+}
+
+.kalp{
+    width:120px;
+    height:120px;
+    background:red;
+    color:white;
+    font-size:22px;
+    position:relative;
+    transform:rotate(-45deg);
+}
+
+.kalp::before,
+.kalp::after{
+    content:"";
+    width:120px;
+    height:120px;
+    background:red;
+    border-radius:50%;
+    position:absolute;
+}
+
+.kalp::before{
+    top:-60px;
+    left:0;
+}
+
+.kalp::after{
+    left:60px;
+    top:0;
+}
+
+.kalp span{
+    position:absolute;
+    transform:rotate(45deg);
+    top:40px;
+    left:25px;
+    z-index:1;
+}
+
+.adam{
+    background:#87cefa;
+    border-radius:20px;
+}
+
+#ekran2,#baybay{
+    display:none;
+}
+</style>
+</head>
+<body>
+
+<div id="ekran1">
+<h1>İsmin ne olsun?</h1>
+
+<button class="kalp" onclick="sonrakiSoru()">
+<span>Zeynep</span>
+</button>
+
+<button class="adam" onclick="baybayMesaji()">
+Herhangi bir adam
+</button>
+</div>
+
+<div id="ekran2">
+<h1>❤️ Hoş geldin Zeynep ❤️</h1>
+<h2>2. soru burada gelecek 😊</h2>
+</div>
+
+<div id="baybay">
+<h1>Senle işim yok baybay 👋</h1>
+</div>
+
+<script>
+function sonrakiSoru(){
+    document.getElementById("ekran1").style.display="none";
+    document.getElementById("ekran2").style.display="block";
+}
+
+function baybayMesaji(){
+    document.getElementById("ekran1").style.display="none";
+    document.getElementById("baybay").style.display="block";
+}
+</script>
+
+</body>
+</html>
