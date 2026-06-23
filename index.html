@@ -11,7 +11,7 @@
             display: flex; 
             justify-content: center; 
             align-items: center;
-            background-color: #001122; /* Daha koyu ve derin koyu mavi */
+            background-color: #001122; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
             position: relative;
@@ -28,15 +28,15 @@
         }
 
         @keyframes fall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(105vh) rotate(360deg);
-                opacity: 0.3;
-            }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0.3; }
         }
+
+        /* Kaydırma Çubuğunu Güzelleştirme */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #0055ff; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0033aa; }
 
         .container {
             background: rgba(255, 255, 255, 0.95); 
@@ -44,8 +44,10 @@
             border-radius: 25px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); 
             text-align: center;
-            max-width: 400px; 
+            max-width: 500px; /* Mesaj sığsın diye genişlettim */
             width: 85%; 
+            max-height: 85vh; /* Ekrana sığmazsa kaydırılabilir olsun */
+            overflow-y: auto;
             border: 3px solid #0055ff;
             z-index: 10;
             backdrop-filter: blur(5px);
@@ -79,6 +81,23 @@
         }
         button:hover { background: #0033aa; transform: scale(1.05); }
         .hidden { display: none; }
+
+        /* Mesaj Alanı Stili */
+        #messageArea {
+            text-align: left;
+            margin-top: 20px;
+            color: #222;
+            font-size: 16px;
+            line-height: 1.8;
+            font-family: 'Georgia', serif; /* Mektup hissiyatı versin diye serif font */
+        }
+        .signature {
+            text-align: right;
+            margin-top: 30px;
+            font-weight: bold;
+            color: #0033aa;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -86,18 +105,18 @@
     <!-- Arka Plandaki Yağan Güller ve Kalpler -->
     <script>
         const elements = ['🌹', '💙', '🌹', '💙'];
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 35; i++) {
             const el = document.createElement('div');
             el.className = 'falling-element';
             el.innerText = elements[Math.floor(Math.random() * elements.length)];
             el.style.left = Math.random() * 100 + 'vw';
-            el.style.animationDuration = (Math.random() * 3 + 4) + 's'; // 4-7 saniye arası düşüş
+            el.style.animationDuration = (Math.random() * 3 + 4) + 's';
             el.style.animationDelay = Math.random() * 5 + 's';
             document.body.appendChild(el);
         }
     </script>
 
-    <!-- 1. ADIM: DOĞUM TARİHİ SORGUSU -->
+    <!-- 1. ADIM: DOĞUM TARİHİ -->
     <div class="container" id="step1">
         <h1>Hoş Geldin Canım 💙</h1>
         <p>Senin olduğunu bilmem lazım...<br>Lütfen devam etmek için <b>doğum tarihini</b> girer misin?</p>
@@ -105,7 +124,7 @@
         <br><button onclick="checkDate()">Devam Et ✨</button>
     </div>
 
-    <!-- 2. ADIM: EN SEVDİĞİ YEMEK SORGUSU -->
+    <!-- 2. ADIM: EN SEVDİĞİ YEMEK -->
     <div class="container hidden" id="step2">
         <h1>Son Bir Doğrulama... 🧐</h1>
         <p>Peki, senin en sevdiğin yemek ne?</p>
@@ -113,17 +132,26 @@
         <br><button onclick="checkFood()">Doğrula ❤️</button>
     </div>
 
-    <!-- 3. ADIM: MESAJ ALANI -->
+    <!-- 3. ADIM: ASIL MESAJ -->
     <div class="container hidden" id="final">
-        <h1>Sana Bir Mesajım Var... ✨</h1>
-        <div id="messageArea" style="text-align: left; margin-top: 20px; color: #111; font-size: 16px;">
-            <!-- Uzun mesajın buraya gelecek -->
+        <h1>Doğrulama Başarılı! ✨</h1>
+        <div id="messageArea">
+            <p>Öncelikle, niye böyle bir site yaptığımı sakın sorma olur mu? Bu aralar çok streslisin, ben de sana nasıl iyi gelebilirim diye düşündüm, aklıma bu geldi.</p>
+            
+            <p>Daha 1 hafta bile olmadı tanışalı ama bizim seninle tesadüfen tanışmadığımızı ikimiz de biliyoruz. Sana bir şekilde destek olmak veya iyi gelmek istiyorum. Niyeyse senden etkilendim, bu konuda yalan söylemeyeceğim. Hayatımda senin gibi bir karakterin olması beni mutlu ediyor.</p>
+            
+            <p>Uzun zaman sonra birinden mesaj alınca heyecanlanıyorum ve benim, şu an olmasa bile, sana arkadaş gözüyle bakmadığımı büyük ihtimal tahmin edebiliyorsundur.</p>
+            
+            <p>Hayatını tam bilmiyorum, önceden nasıl bir hayatın oldu bilmiyorum ama bundan sonraki hayatında her şeyi bilip yanında olmak istiyorum. Neden bilmiyorum, seni mutlu etmek istiyor içimden bir ses. İstanbul'a gelince bu konuları seninle konuşacaktım da dayanamadım ve bu sınav stresinin seni yiyip bitirmesini istemiyorum. Zaten başaracağını 100 metre ileriden belli ediyorsun. Cidden hırsın beni bile etkiliyor. Bir iş yaptığım zaman aklımda sen canlanıyor ve kendimi öyle motive ediyorum.</p>
+            
+            <p>Umarım ilerleyen hayatımda hep sen olursun ve seninle çok güzel anılar biriktiririz. Sadece bunları söylemek istedim. Umarım beni yanlış anlamazsın. Ben senin hayatında başrol olmak falan da istemiyorum. Verdiğin her kararda arkanda duran bir direk olmak istiyorum, koşulsuz güvenebileceğin bir insan olmak istiyorum.</p>
+            
+            <p>Sen istediğini yap, ben seni desteklemek istiyorum. Kısacası, seni mutlu edecek her şeyde ben olmak istiyorum.</p>
         </div>
     </div>
 
     <script>
         function checkDate() {
-            // 15 Temmuz 2004 kontrolü
             if(document.getElementById("dateInput").value === "2004-07-15") {
                 document.getElementById("step1").classList.add("hidden");
                 document.getElementById("step2").classList.remove("hidden");
@@ -133,11 +161,9 @@
         }
 
         function checkFood() {
-            // Balık kontrolü
             if(document.getElementById("foodInput").value.trim().toLowerCase() === "balık") {
                 document.getElementById("step2").classList.add("hidden");
                 document.getElementById("final").classList.remove("hidden");
-                document.getElementById("messageArea").innerHTML = "<b>Doğrulama Başarılı!</b><br><br>Şimdi bana o uzun mesajını gönder, buraya ekleyelim sevgilim. 😊";
             } else { 
                 alert("Yanlış cevap! Benim sevgilim bunu bilirdi... 🥺"); 
             }
