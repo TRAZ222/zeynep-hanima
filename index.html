@@ -2,69 +2,145 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <title>Zeynep'e Özel ❤️</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sadece Zeynep İçin... 💙</title>
     <style>
         body { 
-            margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center;
-            background-color: #001f3f; /* Koyu Mavi */
-            font-family: 'Segoe UI', sans-serif;
-            background-image: radial-gradient(circle, #003366 1px, transparent 1px);
-            background-size: 30px 30px;
-        }
-        .container {
-            background: white; padding: 40px; border-radius: 20px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5); text-align: center;
-            max-width: 400px; width: 80%; border: 2px solid #0055aa;
+            margin: 0; 
+            height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            background-color: #001122; /* Daha koyu ve derin koyu mavi */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
             position: relative;
         }
-        /* Mavi Gül Süslemeleri */
-        .rose { position: absolute; font-size: 30px; }
-        .r1 { top: -20px; left: -20px; } .r2 { bottom: -20px; right: -20px; }
 
-        h1 { color: #001f3f; }
-        input { width: 80%; padding: 10px; margin: 15px 0; border: 1px solid #ccc; border-radius: 5px; }
-        button { background: #001f3f; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        /* Düşen Gül ve Kalp Efektleri */
+        .falling-element {
+            position: absolute;
+            top: -50px;
+            font-size: 24px;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 40px; 
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6); 
+            text-align: center;
+            max-width: 400px; 
+            width: 85%; 
+            border: 3px solid #0055ff;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+        }
+
+        h1 { color: #0033aa; font-size: 24px; margin-bottom: 15px; }
+        p { color: #333; font-size: 16px; line-height: 1.6; }
+        
+        input { 
+            width: 80%; 
+            padding: 12px; 
+            margin: 20px 0; 
+            border: 2px solid #b3d1ff; 
+            border-radius: 10px; 
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+        }
+        input:focus { border-color: #0055ff; }
+        
+        button { 
+            background: #0055ff; 
+            color: white; 
+            padding: 12px 30px; 
+            border: none; 
+            border-radius: 10px; 
+            font-size: 16px;
+            cursor: pointer; 
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        button:hover { background: #0033aa; transform: scale(1.05); }
         .hidden { display: none; }
     </style>
 </head>
 <body>
 
+    <!-- Arka Plandaki Yağan Güller ve Kalpler -->
+    <script>
+        const elements = ['🌹', '💙', '🌹', '💙'];
+        for (let i = 0; i < 30; i++) {
+            const el = document.createElement('div');
+            el.className = 'falling-element';
+            el.innerText = elements[Math.floor(Math.random() * elements.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.animationDuration = (Math.random() * 3 + 4) + 's'; // 4-7 saniye arası düşüş
+            el.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(el);
+        }
+    </script>
+
+    <!-- 1. ADIM: DOĞUM TARİHİ SORGUSU -->
     <div class="container" id="step1">
-        <div class="rose r1">🌹</div> <div class="rose r2">🌹</div>
-        <h1>Hoş Geldin Zeynep</h1>
-        <p>Lütfen doğum tarihini gir:</p>
+        <h1>Hoş Geldin Canım 💙</h1>
+        <p>Senin olduğunu bilmem lazım...<br>Lütfen devam etmek için <b>doğum tarihini</b> girer misin?</p>
         <input type="date" id="dateInput">
-        <br><button onclick="checkDate()">Devam Et</button>
+        <br><button onclick="checkDate()">Devam Et ✨</button>
     </div>
 
+    <!-- 2. ADIM: EN SEVDİĞİ YEMEK SORGUSU -->
     <div class="container hidden" id="step2">
-        <h1>Küçük Bir Soru daha...</h1>
-        <p>En sevdiğin yemek ne?</p>
-        <input type="text" id="foodInput" placeholder="Yemeği yaz...">
-        <br><button onclick="checkFood()">Doğrula</button>
+        <h1>Son Bir Doğrulama... 🧐</h1>
+        <p>Peki, senin en sevdiğin yemek ne?</p>
+        <input type="text" id="foodInput" placeholder="Cevabını buraya yaz...">
+        <br><button onclick="checkFood()">Doğrula ❤️</button>
     </div>
 
+    <!-- 3. ADIM: MESAJ ALANI -->
     <div class="container hidden" id="final">
-        <h1>Sana Bir Notum Var...</h1>
-        <div id="messageArea" style="text-align: left; margin-top: 20px;">
-            <!-- Buraya ileride mesajını koyacağız -->
+        <h1>Sana Bir Mesajım Var... ✨</h1>
+        <div id="messageArea" style="text-align: left; margin-top: 20px; color: #111; font-size: 16px;">
+            <!-- Uzun mesajın buraya gelecek -->
         </div>
     </div>
 
     <script>
         function checkDate() {
+            // 15 Temmuz 2004 kontrolü
             if(document.getElementById("dateInput").value === "2004-07-15") {
                 document.getElementById("step1").classList.add("hidden");
                 document.getElementById("step2").classList.remove("hidden");
-            } else { alert("Tarih yanlış! Tekrar dene."); }
+            } else { 
+                alert("Hmm, bu doğru tarih değil sanki? 🤔"); 
+            }
         }
 
         function checkFood() {
+            // Balık kontrolü
             if(document.getElementById("foodInput").value.trim().toLowerCase() === "balık") {
                 document.getElementById("step2").classList.add("hidden");
                 document.getElementById("final").classList.remove("hidden");
-                document.getElementById("messageArea").innerHTML = "Buraya mesajını yazınca görünecek.";
-            } else { alert("Yanlış cevap :( Tekrar dene."); }
+                document.getElementById("messageArea").innerHTML = "<b>Doğrulama Başarılı!</b><br><br>Şimdi bana o uzun mesajını gönder, buraya ekleyelim sevgilim. 😊";
+            } else { 
+                alert("Yanlış cevap! Benim sevgilim bunu bilirdi... 🥺"); 
+            }
         }
     </script>
 </body>
