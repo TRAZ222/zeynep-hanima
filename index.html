@@ -2,40 +2,70 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zeynep'e Sürpriz ❤️</title>
+    <title>Zeynep'e Özel ❤️</title>
     <style>
         body { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0;
-            background: linear-gradient(135deg, #ffe4e1, #ffb6c1); 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; height: 100vh; display: flex; justify-content: center; align-items: center;
+            background-color: #001f3f; /* Koyu Mavi */
+            font-family: 'Segoe UI', sans-serif;
+            background-image: radial-gradient(circle, #003366 1px, transparent 1px);
+            background-size: 30px 30px;
         }
-        .box { 
-            text-align: center; 
-            background: white; 
-            padding: 50px; 
-            border-radius: 25px; 
-            box-shadow: 0 15px 35px rgba(255, 71, 87, 0.2); 
+        .container {
+            background: white; padding: 40px; border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5); text-align: center;
+            max-width: 400px; width: 80%; border: 2px solid #0055aa;
+            position: relative;
         }
-        h1 { color: #ff4757; font-size: 2.5rem; margin-bottom: 10px; }
-        p { color: #57606f; font-size: 1.2rem; }
-        .heart { color: #ff4757; font-size: 50px; animation: pulse 1.2s infinite; }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
-        }
+        /* Mavi Gül Süslemeleri */
+        .rose { position: absolute; font-size: 30px; }
+        .r1 { top: -20px; left: -20px; } .r2 { bottom: -20px; right: -20px; }
+
+        h1 { color: #001f3f; }
+        input { width: 80%; padding: 10px; margin: 15px 0; border: 1px solid #ccc; border-radius: 5px; }
+        button { background: #001f3f; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <div class="heart">❤️</div>
-        <h1>Seni Çok Seviyorum Zeynep!</h1>
-        <p>Senin için hazırladığım sürpriz web sitesi çok yakında burada olacak...</p>
+
+    <div class="container" id="step1">
+        <div class="rose r1">🌹</div> <div class="rose r2">🌹</div>
+        <h1>Hoş Geldin Zeynep</h1>
+        <p>Lütfen doğum tarihini gir:</p>
+        <input type="date" id="dateInput">
+        <br><button onclick="checkDate()">Devam Et</button>
     </div>
+
+    <div class="container hidden" id="step2">
+        <h1>Küçük Bir Soru daha...</h1>
+        <p>En sevdiğin yemek ne?</p>
+        <input type="text" id="foodInput" placeholder="Yemeği yaz...">
+        <br><button onclick="checkFood()">Doğrula</button>
+    </div>
+
+    <div class="container hidden" id="final">
+        <h1>Sana Bir Notum Var...</h1>
+        <div id="messageArea" style="text-align: left; margin-top: 20px;">
+            <!-- Buraya ileride mesajını koyacağız -->
+        </div>
+    </div>
+
+    <script>
+        function checkDate() {
+            if(document.getElementById("dateInput").value === "2004-07-15") {
+                document.getElementById("step1").classList.add("hidden");
+                document.getElementById("step2").classList.remove("hidden");
+            } else { alert("Tarih yanlış! Tekrar dene."); }
+        }
+
+        function checkFood() {
+            if(document.getElementById("foodInput").value.trim().toLowerCase() === "balık") {
+                document.getElementById("step2").classList.add("hidden");
+                document.getElementById("final").classList.remove("hidden");
+                document.getElementById("messageArea").innerHTML = "Buraya mesajını yazınca görünecek.";
+            } else { alert("Yanlış cevap :( Tekrar dene."); }
+        }
+    </script>
 </body>
 </html>
